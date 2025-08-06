@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { SalvarPagamentoDTO } from '../model/adicionar-pagamento';
+import { AdicionarPagamento } from '../model/adicionar-pagamento';
 import { PagamentoService } from '../service/pagamento.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SuccessToastComponent } from 'src/app/shared/success-toast/success-toast.component';
@@ -49,7 +49,7 @@ export class AdicionarPagamentoComponent implements OnInit {
 
       const isCartao = metodoPagamento === 'CARTAO_CREDITO' || metodoPagamento === 'CARTAO_DEBITO';
 
-      const dto: SalvarPagamentoDTO = {
+      const dto: AdicionarPagamento = {
         cpfCnpj: this.pagamentoForm.value.identificacao,
         valor: this.pagamentoForm.value.valor,
         metodoPagamento: metodoPagamento,
