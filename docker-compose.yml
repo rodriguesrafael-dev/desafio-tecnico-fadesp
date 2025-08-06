@@ -46,7 +46,7 @@ services:
     volumes:
       - kafka_data:/var/lib/kafka/data
     depends_on:
-      - pagamento-zookeeper
+      - zookeeper
     networks:
       - pagamento-network
     
@@ -61,7 +61,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATA_MONGODB_URI=mongodb://admin:admin123@mongodb:27017/test_fadesp?authSource=admin
-      - KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     networks:
       - pagamento-network
 
@@ -86,4 +86,8 @@ volumes:
   mongodb_data:
     driver: local
   kafka_data:
+    driver: local
+  zookeeper_data:    
+    driver: local
+  zookeeper_logs:   
     driver: local
