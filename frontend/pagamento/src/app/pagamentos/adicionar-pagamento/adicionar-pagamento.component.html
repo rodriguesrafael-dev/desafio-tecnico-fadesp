@@ -1,0 +1,63 @@
+<div class="dialog-header">
+  <h2 class="dialog-title">
+    <mat-icon class="dialog-icon">info_outline</mat-icon>
+    Novo Pagamento
+  </h2>
+  <button mat-icon-button class="dialog-close-btn" (click)="fecharDialog()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <form [formGroup]="pagamentoForm" class="dialog-form">
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Identificação</mat-label>
+        <input matInput formControlName="identificacao" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Método de pagamento</mat-label>
+        <mat-select formControlName="metodoPagamento">
+          <mat-option value="BOLETO">Boleto</mat-option>
+          <mat-option value="PIX">Pix</mat-option>
+          <mat-option value="CARTAO_CREDITO">Cartão de Crédito</mat-option>
+          <mat-option value="CARTAO_DEBITO">Cartão de Débito</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Número do Cartão</mat-label>
+        <input matInput formControlName="numeroCartao" />
+        <mat-error *ngIf="pagamentoForm.get('numeroCartao')?.errors?.required">
+          O número do cartão é obrigatório.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Valor</mat-label>
+        <input
+          matInput
+          formControlName="valor"
+          type="text"
+          mask="separator.2"
+          thousandSeparator="."
+          prefix="R$ "
+        />
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="start">
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="pagamentoForm.invalid"
+    (click)="salvarPagamento()"
+  >
+    <mat-icon>save</mat-icon> Salvar Pagamento
+  </button>
+</mat-dialog-actions>
