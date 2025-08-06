@@ -1,0 +1,13 @@
+<div class="toast-container">
+  <div class="toast-content">
+    <mat-icon class="success-icon">check_outline</mat-icon>
+    <span>{{ data.message }}</span>
+  </div>
+  <button
+    mat-icon-button
+    class="transparent-icon-button"
+    (click)="snackBarRef.dismiss()"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
