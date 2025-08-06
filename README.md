@@ -1,8 +1,5 @@
-# desafio-tecnico-fadesp
-Desafio tecnico para Java Fullstack
-
 # Aplicação de simulação de Pagamento
-Desafio técnico, Desenvolvedor Java Fullstack, proposto pela Fadesp.
+Desafio técnico, Desenvolvedor Java Fullstack, Fadesp.
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -33,14 +30,31 @@ Desafio técnico, Desenvolvedor Java Fullstack, proposto pela Fadesp.
 - Docker Compose
 ```bash
 # Ubuntu/Debian
-sudo apt update
-sudo apt install docker.io docker-compose
+$ sudo apt-get update
+$ sudo apt-get install docker-compose-plugin
 
 # CentOS/RHEL/Fedora
-sudo yum install docker docker-compose
-# ou
-sudo dnf install docker docker-compose
+$ sudo yum update
+$ sudo yum install docker-compose-plugin
 ```
+
+1 - Baixar e instalar Docker Compose CLI plugin, executar:
+```bash
+$ DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+$ mkdir -p $DOCKER_CONFIG/cli-plugins
+$ curl -SL https://github.com/docker/compose/releases/download/v2.39.1/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+```
+
+2 - Aplicar permissões:
+```bash
+$ chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+
+# Se preferir para todos os usuarios
+$ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+```
+
+### Fontes
+	https://docs.docker.com/compose/install/linux
 
 ### Recursos
 - Portas disponíveis: 4200, 8089, 27017, 9092
@@ -63,7 +77,7 @@ docker-compose up --build -d
 **Linux:**
 ```bash
 # Se precisar de sudo
-sudo docker-compose up --build -d
+sudo docker-compose -f "docker-compose.yml" up -d --build
 
 # Ou adicione seu usuário ao grupo docker (recomendado)
 sudo usermod -aG docker $USER
