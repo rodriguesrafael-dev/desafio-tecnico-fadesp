@@ -54,7 +54,7 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: ./backend/pagamento
       dockerfile: Dockerfile
     container_name: pagamento-backend
     restart: unless-stopped
@@ -78,7 +78,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./frontend/pagamento
       dockerfile: Dockerfile
     container_name: pagamento-frontend
     restart: unless-stopped
