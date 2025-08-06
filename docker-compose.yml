@@ -52,6 +52,21 @@ services:
     networks:
       - pagamento-network
 
+  kafka-init:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: pagamento-kafka-init
+    depends_on:
+      - kafka
+    command: >
+      bash -c "
+      echo 'Waiting for Kafka to be ready...' &&
+      cub kafka-ready -b kafka:29092 1 60 &&
+      echo 'Creating topic pagamento-status...' &&
+      kafka-topics --create --if-not-exists --topic pagamento-status --bootstrap-server localhost:29092 --partitions 1 --replication-factor 1
+      "
+    networks:
+      - pagamento-network
+      
   backend:
     build:
       context: ./backend/pagamento
@@ -64,9 +79,6 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATA_MONGODB_URI=mongodb://admin:admin123@mongodb:27017/test_fadesp?authSource=admin
       - KAFKA_BOOTSTRAP_SERVERS=localhost:9092
-    depends_on:
-      - mongodb
-      - kafka
     networks:
       - pagamento-network
 
