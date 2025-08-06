@@ -19,7 +19,7 @@ services:
       - pagamento-network
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.4.0
+    image: confluentinc/cp-zookeeper:latest
     container_name: pagamento-zookeeper
     restart: unless-stopped
     environment:
@@ -31,11 +31,9 @@ services:
       - pagamento-network
 
   kafka:
-    image: confluentinc/cp-kafka:7.4.0
+    image: confluentinc/cp-kafka:latest
     container_name: pagamento-kafka
     restart: unless-stopped
-    depends_on:
-      - zookeeper
     ports:
       - "9092:9092"
       - "29092:29092"
@@ -46,26 +44,13 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_CREATE_TOPICS: "pagamento-status:1:1"
     volumes:
       - kafka_data:/var/lib/kafka/data
     networks:
       - pagamento-network
-
-  kafka-init:
-    image: confluentinc/cp-kafka:7.4.0
-    container_name: pagamento-kafka-init
     depends_on:
-      - kafka
-    command: >
-      bash -c "
-      echo 'Waiting for Kafka to be ready...' &&
-      cub kafka-ready -b kafka:29092 1 60 &&
-      echo 'Creating topic pagamento-status...' &&
-      kafka-topics --create --if-not-exists --topic pagamento-status --bootstrap-server localhost:29092 --partitions 1 --replication-factor 1
-      "
-    networks:
-      - pagamento-network
+      - zookeeper
       
   backend:
     build:
