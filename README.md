@@ -63,42 +63,42 @@ $ sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/rodriguesrafael-dev/desafio-tecnico-fadesp.git
-cd desafio-tecnico-fadesp
+$ git clone https://github.com/rodriguesrafael-dev/desafio-tecnico-fadesp.git
+$ cd desafio-tecnico-fadesp
 ```
 
 ### 2. Suba o ambiente completo
 
 **Windows/Mac:**
 ```bash
-docker-compose up --build -d
+$ docker-compose up --build -d
 ```
 
 **Linux:**
 ```bash
 # Se precisar de sudo
-sudo docker-compose -f "docker-compose.yml" up -d --build
+$ sudo docker-compose -f "docker-compose.yml" up -d --build
 
 # Ou adicione seu usuário ao grupo docker (recomendado)
 sudo usermod -aG docker $USER
+
 # Faça logout e login novamente, depois execute:
-docker-compose up --build -d
+$ sudo docker-compose -f "docker-compose.yml" up -d --build
 ```
 
 ### 3. Aguarde a inicialização
 
 **Windows/Mac:**
 ```bash
-docker-compose logs -f
+$ docker-compose logs -f
 ```
 
 **Linux:**
 ```bash
 # Com sudo (se necessário)
-sudo docker-compose logs -f
-
+$ sudo docker-compose logs -f
 # Ou após configurar grupo docker
-docker-compose logs -f
+$ docker-compose logs -f
 ```
 
 ## 🌐 Acesso aos Serviços
@@ -113,54 +113,54 @@ docker-compose logs -f
 ### Windows/Mac
 ```bash
 # Parar todos os serviços
-docker-compose down
+$ docker-compose down
 
 # Ver logs
-docker-compose logs -f
+$ docker-compose logs -f
 
 # Status dos containers
-docker-compose ps
+$ docker-compose ps
 
 # Rebuild específico
-docker-compose up --build -d backend
-docker-compose up --build -d frontend
+$ docker-compose up --build -d backend
+$ docker-compose up --build -d frontend
 ```
 
 ### Linux
 ```bash
 # Parar todos os serviços
-sudo docker-compose down
+$ sudo docker-compose down
 # ou (após configurar grupo docker)
-docker-compose down
+$ docker-compose down
 
 # Ver logs
-sudo docker-compose logs -f
+$ sudo docker-compose logs -f
 # ou
-docker-compose logs -f
+$ docker-compose logs -f
 
 # Status dos containers
-sudo docker-compose ps
+$ sudo docker-compose ps
 # ou
-docker-compose ps
+$ docker-compose ps
 
 # Rebuild específico
-sudo docker-compose up --build -d backend
-sudo docker-compose up --build -d frontend
+$ sudo docker-compose up --build -d backend
+$ sudo docker-compose up --build -d frontend
 # ou
-docker-compose up --build -d backend
-docker-compose up --build -d frontend
+$ docker-compose up --build -d backend
+$ docker-compose up --build -d frontend
 ```
 
 ### Configurar Docker no Linux (recomendado)
 ```bash
 # Adicionar usuário ao grupo docker
-sudo usermod -aG docker $USER
+$ sudo usermod -aG docker $USER
 
 # Reiniciar sessão ou executar
-newgrp docker
+$ newgrp docker
 
 # Testar se funciona sem sudo
-docker --version
+$ docker --version
 ```
 
 ## 🏗️ Estrutura Macro do Projeto
@@ -168,13 +168,15 @@ docker --version
 ```
 ├── docker-compose.yml
 ├── backend/
-│   ├── Dockerfile
-│   ├── src/
-│   └── pom.xml
+│   └── pagamento/
+│       ├── Dockerfile
+│       ├── src/
+│       └── pom.xml
 └── frontend/
-    ├── Dockerfile
-    ├── src/
-    └── package.json
+    └── pagamento/
+        ├── Dockerfile
+        ├── src/
+        └── package.json
 ```
 
 ## 🔧 Configuração
