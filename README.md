@@ -67,7 +67,7 @@ $ git clone https://github.com/rodriguesrafael-dev/desafio-tecnico-fadesp.git
 $ cd desafio-tecnico-fadesp
 ```
 
-### 2. Suba o ambiente completo
+### 2. Construa e suba o ambiente completo
 
 **Windows/Mac:**
 ```bash
@@ -112,6 +112,9 @@ $ docker-compose logs -f
 
 ### Windows/Mac
 ```bash
+# Subir todos os serviços
+$ docker-compose up -d
+
 # Parar todos os serviços
 $ docker-compose down
 
